@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux';
 import { FETCH_ARTICLES, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAILURE } from '../actions/actionTypes';
 import type { ArticlesState } from '../../types/';
 
@@ -7,7 +8,10 @@ const initialState: ArticlesState = {
   loading: false
 };
 
-export default function articlesReducer(state = initialState, action: { type: string; payload: any }) {
+export default function articlesReducer(
+  state: ArticlesState = initialState, 
+  action: AnyAction
+): ArticlesState {
   switch (action.type) {
     case FETCH_ARTICLES:
       return {

@@ -1,16 +1,12 @@
+import { AnyAction } from 'redux';
 import { SET_THEME, SET_PAGE_TITLE } from "../actions/actionTypes.ts";
-
-interface uiAction {
-    type: typeof SET_THEME | typeof SET_PAGE_TITLE;
-    payload: string;
-}
 
 const initialState = {
     theme: 'light',
     title: 'Spaceso'
 };
 
-export default function uiReducer(state = initialState, action: uiAction) {
+export default function uiReducer(state = initialState, action: AnyAction) {
     switch (action.type) {
         case SET_THEME:
             return { ...state, theme: action.payload };
