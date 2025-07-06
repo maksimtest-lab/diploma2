@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { fetchArticles } from '../store/actions/actions';
-import type { Article, ArticlesState } from '../types/articles';
+import type { ArticlesState } from '../types/articles';
+import { ItemsList } from "../components/itemsList";
 
 export function ArticlesPage() {
     const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>();
@@ -36,12 +37,7 @@ export function ArticlesPage() {
     return (
         <>
             <Navigation />
-            {articlesState.items.map((article: Article) => (
-                <div key={article.id}>
-                    <h2>{article.title}</h2>
-                    <p>{article.content}</p>
-                </div>
-            ))}
+            <ItemsList items={articlesState.items} />
         </>
     )
 }

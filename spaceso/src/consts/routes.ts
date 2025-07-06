@@ -9,6 +9,7 @@ export const ROUTES: Routes = {
     ARTICLES: {url: '/articles', name: 'Articles', icon: FaRegImage},
     NEWS: {url: '/news', name: 'News', icon: FaNewspaper},
     SETTINGS: {url: '/settings', name: 'Settings', icon: FaCog},
+    ARTICLE: {url: '/article/:id', name: 'Article', icon: FaRegImage},
     // LOGIN: {url: '/login', name: 'Login'},
     // REGISTRATION: {url: '/registration', name: 'Registration'},
     // LOGOUT: {url: '/logout', name: 'Logout'},

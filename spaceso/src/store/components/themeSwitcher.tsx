@@ -13,8 +13,8 @@ export default function ThemeSwitcher() {
     };
 
     return (
-        <div className="themeSwitcher">
-            {theme === 'light' ? 'Dark' : 'Light' } theme <button className={`themeSwitcherButton ${theme === 'light' ? 'active' : ''}`} onClick={toggleTheme}></button>
+        <div className={`themeSwitcher ${theme}`}>
+            {theme === 'light' ? 'Light' : 'Dark'} theme <button className={`themeSwitcherButton ${theme === 'light' ? '' : 'active'}`} onClick={toggleTheme}></button>
         </div>
     );
 }

@@ -2,6 +2,8 @@ interface Article {
   id: string;
   title: string;
   content: string;
+  image_url: string;
+  published_at: string;
 }
 
 interface ArticlesState {

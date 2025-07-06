@@ -11,4 +11,5 @@ export interface Routes {
     ARTICLES: Route;
     NEWS: Route;
     SETTINGS: Route;
+    ARTICLE: Route;
 }

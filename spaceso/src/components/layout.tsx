@@ -2,15 +2,18 @@ import "./layout.sass"
 import { Header } from "./header/header"
 import PageTitle from "../store/components/pageTitle"
 import ThemeSwitcher from "../store/components/themeSwitcher"
+import { useSelector } from "react-redux"
+import type { RootState } from "../store"
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 function Layout({ children }: LayoutProps) {
+    const theme = useSelector((state: RootState) => state.ui.theme)
 
   return (
-    <div className="layout">
+    <div className={`layout ${theme}`}>
       <Header />
       <main>
         <PageTitle></PageTitle>
