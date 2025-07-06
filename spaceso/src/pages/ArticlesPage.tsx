@@ -12,13 +12,14 @@ import type { Article, ArticlesState } from '../types/articles';
 export function ArticlesPage() {
     const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>();
     const articlesState = useSelector((state: RootState): ArticlesState => state.articles || { items: [], error: null, loading: false });
-    console.log(articlesState);
+    // console.log(articlesState);
+    // articles = useSelector((state: RootState): ArticlesState => state.articles || { items: [], error: null, loading: false });
     
     useEffect(() => {
-        console.log('Fetching articles...');
+        // console.log('Fetching articles...');
         dispatch(setPageTitle('Articles'));
         dispatch(fetchArticles());
-    }, [dispatch]);
+    }, []);
 
     if (!articlesState) {
         return <div>Loading...</div>;
