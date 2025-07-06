@@ -11,7 +11,7 @@ export function Navigation() {
                     {NAVIGATION.map((route: NavigationItem) => (
                         <li key={route.url}>
                             <NavLink to={route.url}>
-                                {route.icon && <route.icon className="nav-icon" />}
+                                {/* {route.icon && <route.icon className="nav-icon" />} */}
                                 {route.name}
                             </NavLink>
                         </li>

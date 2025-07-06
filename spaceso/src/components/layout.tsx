@@ -2,6 +2,7 @@ import "./layout.sass"
 import { Header } from "./header/header"
 import { Navigation } from "./navigation"
 import PageTitle from "../store/components/pageTitle"
+import ThemeSwitcher from "../store/components/themeSwitcher"
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,12 +15,11 @@ function Layout({ children }: LayoutProps) {
       <Header />
       <main>
         <PageTitle></PageTitle>
-        <Navigation />
-
         {children}
       </main>
       <footer>
         <p>© {new Date().getFullYear()} Spaceso. All rights reserved.</p>
+        <ThemeSwitcher />
       </footer>
     </div>
   )
