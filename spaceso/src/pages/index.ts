@@ -2,5 +2,6 @@ import { MainPage } from './MainPage';
 import { ArticlesPage } from './ArticlesPage';
 import { NewsPage } from './NewsPage';
 import { Settings } from './SettingsPage';
+import { PageNotFound } from './PageNotFound';
 
-export { MainPage, ArticlesPage, NewsPage, Settings }
+export { MainPage, ArticlesPage, NewsPage, Settings, PageNotFound } 

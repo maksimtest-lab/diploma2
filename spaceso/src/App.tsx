@@ -5,6 +5,7 @@ import { ROUTES } from "./consts/routes";
 import { ArticlesPage } from "./pages";
 import { NewsPage } from "./pages";
 import { Settings } from "./pages";
+import { PageNotFound } from "./pages";
 
 import "./App.sass";
 
@@ -18,6 +19,7 @@ function App() {
                     <Route path={ROUTES.ARTICLES.url} element={<ArticlesPage />} />
                     <Route path={ROUTES.NEWS.url} element={<NewsPage />} />
                     <Route path={ROUTES.SETTINGS.url} element={<Settings />} />
+                    <Route path="*" element={<PageNotFound />} />
                 </Routes>
             </Layout>
         </BrowserRouter>

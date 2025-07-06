@@ -1,6 +1,5 @@
 import "./layout.sass"
 import { Header } from "./header/header"
-import { Navigation } from "./navigation"
 import PageTitle from "../store/components/pageTitle"
 import ThemeSwitcher from "../store/components/themeSwitcher"
 
