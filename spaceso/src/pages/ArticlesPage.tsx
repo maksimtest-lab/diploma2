@@ -2,7 +2,7 @@ import { Navigation } from "../components";
 import { useDispatch } from 'react-redux';
 import type { ThunkDispatch } from 'redux-thunk';
 import type { AnyAction } from 'redux';
-import { setPageTitle } from '../store/actions/actions';
+import { setPageTitle, setBreadcrumbs } from '../store/actions/actions';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
@@ -10,6 +10,7 @@ import { fetchArticles } from '../store/actions/actions';
 import type { ArticlesState } from '../types/articles';
 import { ItemsList } from "../components/itemsList";
 import { ROUTES } from "../consts/routes";
+import Pagination from "../components/pagination";
 
 export function ArticlesPage() {
     const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>();
@@ -18,6 +19,7 @@ export function ArticlesPage() {
     useEffect(() => {
         dispatch(setPageTitle('Articles'));
         dispatch(fetchArticles());
+        dispatch(setBreadcrumbs([]));
     }, [dispatch]);
 
     if (articlesState.loading) {
@@ -32,6 +34,7 @@ export function ArticlesPage() {
         <>
             <Navigation />
             <ItemsList items={articlesState.items} route={ROUTES.ARTICLE}/>
+            <Pagination route={ROUTES.ARTICLES_PAGE} next={ROUTES.ARTICLES_PAGE_NEXT} prev={ROUTES.ARTICLES_PAGE_PREV}/>
         </>
     )
 }

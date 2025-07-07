@@ -1,4 +1,4 @@
-import { SET_PAGE_TITLE, SET_THEME, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAILURE, SET_BREADCRUMBS, FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_FAILURE } from './actionTypes';
+import { SET_PAGE_TITLE, SET_THEME, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAILURE, SET_BREADCRUMBS, FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_FAILURE, SET_ARTICLE } from './actionTypes';
 import { API_ARTICLE_URL, API_ARTICLES_URL } from '../../consts/api';
 import axios from 'axios';
 import type { Article } from '../../types/articles';
@@ -68,3 +68,11 @@ export const fetchArticle = (id: string) => {
     }
   };
 };
+
+export const setArticle = (article: Article) => {
+  return {
+    type: SET_ARTICLE,
+    payload: article
+  };
+};
+  

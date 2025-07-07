@@ -9,6 +9,9 @@ export interface Route {
 export interface Routes {
     HOME: Route;
     ARTICLES: Route;
+    ARTICLES_PAGE: Route;
+    ARTICLES_PAGE_NEXT: Route;
+    ARTICLES_PAGE_PREV: Route;
     NEWS: Route;
     SETTINGS: Route;
     ARTICLE: Route;

@@ -5,6 +5,9 @@ import ThemeSwitcher from "../store/components/themeSwitcher"
 import { useSelector } from "react-redux"
 import type { RootState } from "../store"
 import { Breadcrumbs } from "./breadcrumbs"
+import { useEffect } from "react"
+import { setBreadcrumbs } from "../store/actions/actions"
+import { useDispatch } from "react-redux"
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,21 +15,27 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
     const theme = useSelector((state: RootState) => state.ui.theme)
+    const dispatch = useDispatch()
 
-  return (
-    <div className={`layout ${theme}`}>
-      <Header />
-      <main>
-        <Breadcrumbs />
-        <PageTitle></PageTitle>
-        {children}
-      </main>
-      <footer>
-        <p>© {new Date().getFullYear()} Spaceso. All rights reserved.</p>
-        <ThemeSwitcher />
-      </footer>
-    </div>
-  )
+    useEffect(() => {
+        dispatch(setBreadcrumbs([
+        ]));
+    }, [dispatch]);
+
+    return (
+        <div className={`layout ${theme}`}>
+        <Header />
+        <main>
+            <Breadcrumbs />
+            <PageTitle></PageTitle>
+            {children}
+        </main>
+        <footer>
+            <p>© {new Date().getFullYear()} Spaceso. All rights reserved.</p>
+            <ThemeSwitcher />
+        </footer>
+        </div>
+    )
 }
 
 export { Layout }

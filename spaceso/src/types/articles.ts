@@ -1,23 +1,27 @@
 interface Article {
   id: string;
   title: string;
-  content: string;
+  url: string;
   image_url: string;
+  news_site: string;
+  summary: string;
   published_at: string;
-  author: [
-    {
-      name: string;
-      socials: {
-        youtube: string;
-        facebook: string;
-        instagram: string;
-        x: string;
-        linkedin: string;
-        mastodon: string;
-        bluesky: string;
-      } | null;
-    }
-  ];
+  updated_at?: string;
+  featured: boolean;
+  launches: any[];
+  events: any[];
+  author?: {
+    name: string;
+    socials?: {
+      youtube?: string;
+      facebook?: string;
+      instagram?: string;
+      x?: string;
+      linkedin?: string;
+      mastodon?: string;
+      bluesky?: string;
+    } | null;
+  }[];
 }
 
 interface ArticlesState {
