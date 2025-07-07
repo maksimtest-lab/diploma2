@@ -8,7 +8,7 @@ import { Breadcrumbs } from "./breadcrumbs"
 import { useEffect } from "react"
 import { setBreadcrumbs } from "../store/actions/actions"
 import { useDispatch } from "react-redux"
-import { getAuthState } from "../store/actions/actions"
+// import { getAuthState } from "../store/actions/actions"
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ function Layout({ children }: LayoutProps) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAuthState());
+        // dispatch(getAuthState());
         dispatch(setBreadcrumbs([
         ]));
     }, [dispatch]);
