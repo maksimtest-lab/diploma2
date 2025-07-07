@@ -14,7 +14,11 @@ const store = configureStore({
   middleware: (getDefaultMiddleware: (options?: { serializableCheck?: boolean }) => any) => getDefaultMiddleware()
 });
 
-export type RootState = ReturnType<typeof store.getState>;  
+// Infer the root state type from the store itself
+type RootState = ReturnType<typeof store.getState>;
+
+// Export the type for use in components
+export { RootState };  
 export type AppDispatch = typeof store.dispatch;
 
 export default store;

@@ -11,7 +11,7 @@ import "./registrationPage.sass"
 
 export function LoginPage() {
     const dispatch = useDispatch();
-    const { user , isAuthenticated, error } = useSelector((state: RootState) => state.auth);
+    const { isAuthenticated, error } = useSelector((state: RootState) => state.auth);
     const { theme } = useSelector((state: RootState) => state.ui);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -23,7 +23,7 @@ export function LoginPage() {
         ]));
         dispatch(setPageTitle('Sign In'));
     }, [dispatch]);
-    
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(login(emailRef.current?.value || '', passwordRef.current?.value || ''));

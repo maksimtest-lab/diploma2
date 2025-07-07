@@ -1,7 +1,8 @@
 import { AnyAction } from 'redux';
 import { LOGIN, LOGOUT, REGISTRATION } from '../actions/actionTypes';
+import { AuthState } from '../types/authTypes';
 
-const initialState = {
+const initialState: AuthState = {
     isAuthenticated: false,
     user: null,
     error: null,
@@ -12,7 +13,7 @@ const validCredentials = {
     password: '123456',
 }
 
-export default function authReducer(state = initialState, action: AnyAction) {
+export default function authReducer(state: AuthState = initialState, action: AnyAction): AuthState {
     let username, password;
 
     switch (action.type) {

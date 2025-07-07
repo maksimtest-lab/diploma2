@@ -11,7 +11,7 @@ import "./registrationPage.sass"
 
 export function RegistrationPage() {
     const dispatch = useDispatch();
-    const { user , isAuthenticated, error } = useSelector((state: RootState) => state.auth);
+    const { isAuthenticated, error } = useSelector((state: RootState) => state.auth);
     const { theme } = useSelector((state: RootState) => state.ui);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
