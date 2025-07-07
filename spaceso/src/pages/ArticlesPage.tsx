@@ -41,7 +41,7 @@ export function ArticlesPage() {
         <>
             <Navigation />
             <ItemsList items={articlesState.items} route={ROUTES.ARTICLE}/>
-            <Pagination route={ROUTES.ARTICLES_PAGE} />
+            <Pagination route={ROUTES.ARTICLES_PAGE} state={articlesState} />
         </>
     )
 }

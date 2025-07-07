@@ -7,7 +7,7 @@ export function MainPage() {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(setPageTitle('Main Page'));
+        dispatch(setPageTitle(''));
     }, [dispatch]);
 
     return (

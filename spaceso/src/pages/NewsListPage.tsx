@@ -15,7 +15,7 @@ import { useParams } from 'react-router-dom';
 
 export function NewsListPage() {
     const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>();
-    const NewsListState = useSelector((state: RootState): NewsListState => state.newsList || { items: [], error: null, loading: false });
+    const newsListState = useSelector((state: RootState): NewsListState => state.newsList || { items: [], error: null, loading: false });
     const search = useSelector((state: RootState) => state.ui.search);
  
     const { page } = useParams<{ page: string }>() || { page: "1" };  
@@ -24,24 +24,22 @@ export function NewsListPage() {
         dispatch(setPageTitle('News'));
         dispatch(fetchNewsList(null, Number(page), search));
         dispatch(setBreadcrumbs([]));
-        console.log(NewsListState);
+        console.log(newsListState);
     }, [dispatch, page, search]);
 
-
-
-    if (NewsListState.loading) {
+    if (newsListState.loading) {
         return <div>Loading news...</div>;
     }
 
-    if (NewsListState.error) {
-        return <div>Error: {NewsListState.error}</div>;
+    if (newsListState.error) {
+        return <div>Error: {newsListState.error}</div>;
     }
 
     return (
         <>
             <Navigation />
-            <ItemsList items={NewsListState.items} route={ROUTES.NEWSLIST}/>
-            <Pagination route={ROUTES.NEWSLIST_PAGE} />
+            <ItemsList items={newsListState.items} route={ROUTES.NEWSLIST}/>
+            <Pagination route={ROUTES.NEWSLIST_PAGE} state={newsListState} />
         </>
     )
 }
