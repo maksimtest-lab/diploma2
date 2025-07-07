@@ -9,8 +9,10 @@ export function Breadcrumbs() {
     return (
         <div className="breadcrumbs">
             {breadcrumbs.map((breadcrumb: Route, index: number) => (
-                <NavLink to={breadcrumb.url || ''} key={breadcrumb.url || ''}>{breadcrumb.name}</NavLink>
-                {index < breadcrumbs.length - 1 && ' / '}
+                <div key={breadcrumb.url || ''}>
+                    <NavLink to={breadcrumb.url || ''} title={breadcrumb.name}>{breadcrumb.name}</NavLink>
+                    {index < breadcrumbs.length - 1 && ' / '}
+                </div>
             ))}
         </div>
     )

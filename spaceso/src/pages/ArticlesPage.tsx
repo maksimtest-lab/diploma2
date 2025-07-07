@@ -14,18 +14,11 @@ import { ROUTES } from "../consts/routes";
 export function ArticlesPage() {
     const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>();
     const articlesState = useSelector((state: RootState): ArticlesState => state.articles || { items: [], error: null, loading: false });
-    // console.log(articlesState);
-    // articles = useSelector((state: RootState): ArticlesState => state.articles || { items: [], error: null, loading: false });
     
     useEffect(() => {
-        // console.log('Fetching articles...');
         dispatch(setPageTitle('Articles'));
         dispatch(fetchArticles());
-    }, []);
-
-    if (!articlesState) {
-        return <div>Loading...</div>;
-    }
+    }, [dispatch]);
 
     if (articlesState.loading) {
         return <div>Loading articles...</div>;
