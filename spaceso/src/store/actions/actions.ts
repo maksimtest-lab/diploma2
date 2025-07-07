@@ -3,6 +3,9 @@ import { API_ARTICLE_URL, API_ARTICLES_URL } from '../../consts/api';
 import axios from 'axios';
 import type { Article } from '../../types/articles';
 import type { Route } from '../../types/route';
+import type { RootState } from '../../store';
+import type { ThunkDispatch } from 'redux-thunk';
+import type { AnyAction } from 'redux';
 
 export const setPageTitle = (title: string) => {
   return {
@@ -36,10 +39,11 @@ export const fetchArticlesFailure = (error: string) => ({
 });
 
 export const fetchArticles = () => {
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
     try {
       const response = await axios.get(API_ARTICLES_URL);
-      dispatch(fetchArticlesSuccess(response.data.results));
+      console.log(response.data);
+      dispatch(fetchArticlesSuccess(response.data));
     } catch (error) {
       console.error('Error fetching articles:', error);
       dispatch(fetchArticlesFailure(error instanceof Error ? error.message : 'Unknown error'));
@@ -58,10 +62,18 @@ export const fetchArticleFailure = (error: string) => ({
 });
 
 export const fetchArticle = (id: string) => {
-  return async (dispatch: any) => {
+  return async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
+    dispatch(setArticle(null));
+    
     try {
       const response = await axios.get(API_ARTICLE_URL.replace(':id', id));
       dispatch(fetchArticleSuccess(response.data));
+      dispatch(setBreadcrumbs([
+        {url: '/', name: 'Home'},
+        {url: '/articles', name: 'Articles'},
+        {url: `/article/${id}`, name: response.data.title ? `${response.data.title.slice(0, 40)}...` : 'Article'}
+      ]));
+      dispatch(setPageTitle(response.data.title || 'Article Page'));      
     } catch (error) {
       console.error('Error fetching article:', error);
       dispatch(fetchArticleFailure(error instanceof Error ? error.message : 'Unknown error'));

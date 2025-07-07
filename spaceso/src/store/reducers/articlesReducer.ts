@@ -4,6 +4,10 @@ import type { ArticlesState } from '../../types/';
 
 const initialState: ArticlesState = {
   items: [],
+  count: 0,
+  page: 0,
+  prev: null,
+  next: null,
   error: null,
   loading: false
 };
@@ -22,7 +26,11 @@ export default function articlesReducer(
     case FETCH_ARTICLES_SUCCESS:
       return {
         ...state,
-        items: action.payload,
+        items: action.payload.results,
+        count: action.payload.count,
+        page: action.payload.page,
+        prev: action.payload.prev,
+        next: action.payload.next,
         loading: false
       };
 

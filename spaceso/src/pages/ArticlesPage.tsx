@@ -20,6 +20,7 @@ export function ArticlesPage() {
         dispatch(setPageTitle('Articles'));
         dispatch(fetchArticles());
         dispatch(setBreadcrumbs([]));
+        console.log(articlesState);   
     }, [dispatch]);
 
     if (articlesState.loading) {

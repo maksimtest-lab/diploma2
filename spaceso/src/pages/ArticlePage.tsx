@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { setPageTitle, setBreadcrumbs, setArticle } from "../store/actions/actions";
 import "./articlePage.sass"
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
@@ -20,16 +19,15 @@ export function ArticlePage() {
     const theme = useSelector((state: RootState) => state.ui.theme);
     
     useEffect(() => {
-        dispatch(setPageTitle(article?.title || 'Article Page'));
-        dispatch(setArticle(null));
-        dispatch(fetchArticle(id!));
-        dispatch(setBreadcrumbs([
-            {url: '/', name: 'Home'},
-            {url: '/articles', name: 'Articles'},
-            {url: `/article/${id}`, name: article?.title ? `${article.title.slice(0, 40)}...` : 'Article'}
-        ]));
+        
+        // if (article) {
+        //     dispatch(setArticle(null));
+        // }
 
-    }, []);
+
+        dispatch(fetchArticle(id!));
+
+    }, [dispatch, id]);
 
     
     if (articleState.loading) {
