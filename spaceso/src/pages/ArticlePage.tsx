@@ -9,6 +9,7 @@ import { fetchArticle } from "../store/actions/actions";
 import type { ThunkDispatch } from 'redux-thunk';
 import type { AnyAction } from 'redux';
 import Socials from "../components/socials";
+import Backlink from "../components/backlink";
 
 export function ArticlePage() {
 
@@ -62,6 +63,8 @@ export function ArticlePage() {
                     
                     <Socials />
                 </div>
+
+                <Backlink />
                 </>
             )}
         </div>

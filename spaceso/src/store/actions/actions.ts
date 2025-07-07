@@ -43,12 +43,14 @@ export const fetchArticles = (url: string | null, page: number | null = null) =>
     let fetchUrl = url || API_ARTICLES_URL;
     
     if (page) {
-      fetchUrl += `?page=${page}`;
+      if (typeof page === 'number') {
+        const offset = (page - 1) * 12;
+        fetchUrl += `&offset=${offset}`;
+      }
     }
     
     try {
       const response = await axios.get(fetchUrl);
-      console.log(response.data);
       dispatch(fetchArticlesSuccess(response.data));
     } catch (error) {
       console.error('Error fetching articles:', error);

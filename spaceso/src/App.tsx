@@ -20,8 +20,6 @@ function App() {
                     <Route path={ROUTES.ARTICLES.url} element={<ArticlesPage />} />
                     <Route path={ROUTES.ARTICLE.url} element={<ArticlePage />} />
                     <Route path={ROUTES.ARTICLES_PAGE.url} element={<ArticlesPage />} />
-                    <Route path={ROUTES.ARTICLES_PAGE_NEXT.url} element={<ArticlesPage />} />
-                    <Route path={ROUTES.ARTICLES_PAGE_PREV.url} element={<ArticlesPage />} />
                     <Route path={ROUTES.NEWS.url} element={<NewsPage />} />
                     <Route path={ROUTES.SETTINGS.url} element={<Settings />} />
                     <Route path="*" element={<PageNotFound />} />

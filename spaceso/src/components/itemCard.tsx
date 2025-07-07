@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '../store'
 import type { Article } from '../types/articles'
 import { getArticleDate } from '../helpers' 
-import "./itemCard.sass"
 import { NavLink } from 'react-router-dom'
 import type { Route } from '../types/route'
+import "./itemCard.sass"
 
 interface ItemCardProps {
     item: Article;

@@ -8,8 +8,6 @@ export const ROUTES: Routes = {
     HOME: {url: '/', name: 'Home', icon: FaFire},
     ARTICLES: {url: '/articles', name: 'Articles', icon: FaRegImage},
     ARTICLES_PAGE: {url: '/articles/page/:page', name: 'Articles Page', icon: FaRegImage},
-    ARTICLES_PAGE_NEXT: {url: '/articles/page/next', name: 'Articles Page', icon: FaRegImage},
-    ARTICLES_PAGE_PREV: {url: '/articles/page/prev', name: 'Articles Page', icon: FaRegImage},
     NEWS: {url: '/news', name: 'News', icon: FaNewspaper},
     SETTINGS: {url: '/settings', name: 'Settings', icon: FaCog},
     ARTICLE: {url: '/article/:id', name: 'Article', icon: FaRegImage},

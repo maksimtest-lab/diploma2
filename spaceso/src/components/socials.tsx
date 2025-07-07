@@ -8,13 +8,13 @@ export default function Socials() {
     
     return (
         <div className={`socials ${theme}`}>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="socialsLink">
                 <FaFacebook size={24}/>
             </a>
-            <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer" className="socialsLink">
                 <FaTwitter size={24}/>
             </a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="socialsLink">
                 <FaInstagram size={24}/>
             </a>
         </div>

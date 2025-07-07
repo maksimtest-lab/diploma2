@@ -21,11 +21,11 @@ export function ArticlesPage() {
 
     useEffect(() => {
         dispatch(setPageTitle('Articles'));
-        dispatch(fetchArticles(null, page));
+        dispatch(fetchArticles(null, Number(page)));
         dispatch(setBreadcrumbs([]));
         console.log(articlesState);
         // console.log(page);
-    }, [dispatch]);
+    }, [dispatch, page]);
 
 
 
@@ -41,8 +41,7 @@ export function ArticlesPage() {
         <>
             <Navigation />
             <ItemsList items={articlesState.items} route={ROUTES.ARTICLE}/>
-            <Pagination route={ROUTES.ARTICLES_PAGE} next={ROUTES.ARTICLES_PAGE_NEXT} prev={ROUTES.ARTICLES_PAGE_PREV}/>
-            {/* <Pagination route={ROUTES.ARTICLES_PAGE} next={ROUTES.ARTICLES_PAGE_NEXT} prev={ROUTES.ARTICLES_PAGE_PREV} state={articlesState} featchCallBack={fetchArticles}/> */}
+            <Pagination route={ROUTES.ARTICLES_PAGE} />
         </>
     )
 }
