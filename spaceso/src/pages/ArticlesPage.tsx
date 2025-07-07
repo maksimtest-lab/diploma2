@@ -9,6 +9,7 @@ import type { RootState } from '../store';
 import { fetchArticles } from '../store/actions/actions';
 import type { ArticlesState } from '../types/articles';
 import { ItemsList } from "../components/itemsList";
+import { ROUTES } from "../consts/routes";
 
 export function ArticlesPage() {
     const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>();
@@ -37,7 +38,7 @@ export function ArticlesPage() {
     return (
         <>
             <Navigation />
-            <ItemsList items={articlesState.items} />
+            <ItemsList items={articlesState.items} route={ROUTES.ARTICLE}/>
         </>
     )
 }

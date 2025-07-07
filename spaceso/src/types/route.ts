@@ -1,7 +1,7 @@
 import type { IconType } from "react-icons";
 
 export interface Route {
-    url: string;
+    url?: string;
     name: string;
     icon?: IconType;
 }

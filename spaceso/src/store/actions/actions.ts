@@ -1,7 +1,8 @@
-import { SET_PAGE_TITLE, SET_THEME, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAILURE } from './actionTypes';
+import { SET_PAGE_TITLE, SET_THEME, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAILURE, SET_BREADCRUMBS } from './actionTypes';
 import { API_ARTICLES_URL } from '../../consts/api';
 import axios from 'axios';
 import type { Article } from '../../types/articles';
+import type { Route } from '../../types/route';
 
 export const setPageTitle = (title: string) => {
   return {
@@ -14,6 +15,13 @@ export const setTheme = (theme: 'light' | 'dark') => {
   return {
     type: SET_THEME,
     payload: theme
+  };
+};
+
+export const setBreadcrumbs = (breadcrumbs: Route[]) => {
+  return {
+    type: SET_BREADCRUMBS,
+    payload: breadcrumbs
   };
 };
 
