@@ -8,7 +8,7 @@ import type { RootState } from "../store";
 export default function Pagination({ route, next, prev }: { route: Route, next: Route, prev: Route }) {
     const { page } = useParams<{ page: string }>(); 
     const theme = useSelector((state: RootState) => state.ui.theme);
-
+ 
     return (
         <div className={`pagination ${theme}`}>
             <NavLink to={prev.url || ""} className="paginationButton prev"><FaArrowLeft /> Prev</NavLink>

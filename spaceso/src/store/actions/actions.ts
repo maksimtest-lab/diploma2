@@ -38,10 +38,16 @@ export const fetchArticlesFailure = (error: string) => ({
   payload: error
 });
 
-export const fetchArticles = () => {
+export const fetchArticles = (url: string | null, page: number | null = null) => {
   return async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
+    let fetchUrl = url || API_ARTICLES_URL;
+    
+    if (page) {
+      fetchUrl += `?page=${page}`;
+    }
+    
     try {
-      const response = await axios.get(API_ARTICLES_URL);
+      const response = await axios.get(fetchUrl);
       console.log(response.data);
       dispatch(fetchArticlesSuccess(response.data));
     } catch (error) {

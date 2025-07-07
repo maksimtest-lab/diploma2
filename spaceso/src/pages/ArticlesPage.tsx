@@ -11,17 +11,23 @@ import type { ArticlesState } from '../types/articles';
 import { ItemsList } from "../components/itemsList";
 import { ROUTES } from "../consts/routes";
 import Pagination from "../components/pagination";
+import { useParams } from 'react-router-dom';
 
 export function ArticlesPage() {
     const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>();
     const articlesState = useSelector((state: RootState): ArticlesState => state.articles || { items: [], error: null, loading: false });
-    
+ 
+    const { page } = useParams<{ page: string }>() || { page: "1" };  
+
     useEffect(() => {
         dispatch(setPageTitle('Articles'));
-        dispatch(fetchArticles());
+        dispatch(fetchArticles(null, page));
         dispatch(setBreadcrumbs([]));
-        console.log(articlesState);   
+        console.log(articlesState);
+        // console.log(page);
     }, [dispatch]);
+
+
 
     if (articlesState.loading) {
         return <div>Loading articles...</div>;
@@ -36,6 +42,7 @@ export function ArticlesPage() {
             <Navigation />
             <ItemsList items={articlesState.items} route={ROUTES.ARTICLE}/>
             <Pagination route={ROUTES.ARTICLES_PAGE} next={ROUTES.ARTICLES_PAGE_NEXT} prev={ROUTES.ARTICLES_PAGE_PREV}/>
+            {/* <Pagination route={ROUTES.ARTICLES_PAGE} next={ROUTES.ARTICLES_PAGE_NEXT} prev={ROUTES.ARTICLES_PAGE_PREV} state={articlesState} featchCallBack={fetchArticles}/> */}
         </>
     )
 }
