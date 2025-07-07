@@ -236,3 +236,35 @@ export const logout = (): ThunkAction<Promise<void>, RootState, unknown, AnyActi
         });
       }
     };      
+
+export const updateUsername = (username: string): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => 
+  async (dispatch) => {
+    try {
+      const user = auth.currentUser;
+      if (user) {
+        dispatch({
+          type: GET_AUTH_STATE,
+          payload: {
+            isAuthenticated: true,
+            user: {
+              uid: user.uid,
+              email: user.email,
+              displayName: username,
+              photoURL: user.photoURL
+            },
+            error: null
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Error updating username:', error);
+      dispatch({
+        type: GET_AUTH_STATE,
+        payload: {
+          isAuthenticated: false,
+          user: null,
+          error: error instanceof Error ? error.message : 'An unknown error occurred'
+        }
+      });
+    }
+};
