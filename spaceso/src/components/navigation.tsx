@@ -10,7 +10,7 @@ export function Navigation() {
     const theme = useSelector((state: RootState) => state.ui.theme)
     const currentPath = useLocation().pathname;
 
-    return (
+    return (    
         <div className={`navigation ${theme}`}>
             <nav>
                 <ul>

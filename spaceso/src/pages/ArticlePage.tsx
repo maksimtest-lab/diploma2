@@ -21,7 +21,7 @@ export function ArticlePage() {
     
     useEffect(() => {
         dispatch(setPageTitle(article?.title || 'Article Page'));
-        dispatch(setArticle({ item: null, error: null, loading: true }));
+        dispatch(setArticle(null));
         dispatch(fetchArticle(id!));
         dispatch(setBreadcrumbs([
             {url: '/', name: 'Home'},

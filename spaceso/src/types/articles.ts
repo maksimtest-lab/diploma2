@@ -31,7 +31,7 @@ interface ArticlesState {
 }
 
 interface ArticleState {
-  item: Article;
+  item: Article | null;
   error: string | null;
   loading: boolean;
 }

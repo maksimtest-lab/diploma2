@@ -69,7 +69,7 @@ export const fetchArticle = (id: string) => {
   };
 };
 
-export const setArticle = (article: Article) => {
+export const setArticle = (article: Article | null) => {
   return {
     type: SET_ARTICLE,
     payload: article

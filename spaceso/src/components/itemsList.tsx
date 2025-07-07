@@ -5,14 +5,25 @@ import type { Article } from '../types/articles'
 import ItemCard from './itemCard'
 import type { Route } from '../types/route'
 
-export function ItemsList({ items, route }: { items: Article[]; route: Route }) {
-    const theme = useSelector((state: RootState) => state.ui.theme)
+interface ItemsListProps {
+    items: Article[];
+    route: Route;
+}
+
+export function ItemsList({ items, route }: ItemsListProps) {
+    const theme = useSelector((state: RootState) => state.ui.theme);
+    
+    // Only render items if the route has a URL
+    if (!route.url) {
+        console.warn('ItemsList received a route without a URL');
+        return null;
+    }
     
     return (
         <div className={`itemsList ${theme}`}>
             {items.map((item: Article) => (
-                <ItemCard key={item.id} item={item} route={route} />
+                <ItemCard key={item.id} item={item} route={route as Route & { url: string }} />
             ))}
         </div>
-    )
+    );
 }

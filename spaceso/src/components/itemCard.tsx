@@ -6,7 +6,12 @@ import "./itemCard.sass"
 import { NavLink } from 'react-router-dom'
 import type { Route } from '../types/route'
 
-export default function ItemCard({ item, route }: { item: Article; route: Route }) { 
+interface ItemCardProps {
+    item: Article;
+    route: Omit<Route, 'url'> & { url: string }; // Make url required for ItemCard
+}
+
+export default function ItemCard({ item, route }: ItemCardProps) {
     const theme = useSelector((state: RootState) => state.ui.theme);
 
     return (
