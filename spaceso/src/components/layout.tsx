@@ -8,34 +8,36 @@ import { Breadcrumbs } from "./breadcrumbs"
 import { useEffect } from "react"
 import { setBreadcrumbs } from "../store/actions/actions"
 import { useDispatch } from "react-redux"
-// import { getAuthState } from "../store/actions/actions"
+import MobileMenu from "./mobileMenu"
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 function Layout({ children }: LayoutProps) {
-    const theme = useSelector((state: RootState) => state.ui.theme)
+    const {theme, menuOpen} = useSelector((state: RootState) => state.ui)
+
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // dispatch(getAuthState());
         dispatch(setBreadcrumbs([
         ]));
     }, [dispatch]);
 
     return (
         <div className={`layout ${theme}`}>
-        <Header />
-        <main>
-            <Breadcrumbs />
-            <PageTitle></PageTitle>
-            {children}
-        </main>
-        <footer>
-            <p>© {new Date().getFullYear()} Spaceso. All rights reserved.</p>
-            <ThemeSwitcher />
-        </footer>
+            <MobileMenu />
+            {!menuOpen && <><Header />
+            <main>
+                <Breadcrumbs />
+                <PageTitle></PageTitle>
+                {children}
+            </main>
+            <footer>
+                <p>© {new Date().getFullYear()} Spaceso. All rights reserved.</p>
+                <ThemeSwitcher />
+            </footer>
+            </>}
         </div>
     )
 }

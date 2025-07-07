@@ -5,7 +5,7 @@ import type { Route } from "../types/route";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
 import type { ArticlesState } from "../types/articles";
-import type { NewsListState } from "../types/newsList";
+import type { NewsListState } from "../types/news";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -38,8 +38,8 @@ export default function Pagination({ route, state }: { route: Route, state: Arti
     return (
         <div className={`pagination ${theme}`}>
             <NavLink to={route.url?.replace(":page", `${prevPage}`) || ""} className={`paginationButton prev ${!hasPrev ? "notActive" : ""}`}><FaArrowLeft /> Prev</NavLink>
-            <div className="paginationStats">
-                Current page: {page} | Total pages: {totalPages}
+            <div className="paginationButton paginationStats">
+                page: {page} | total: {totalPages}
                 {/* <NavLink to={route.url?.replace(":page", "1") || ""} className={`paginationButton ${page === "1" || page === "undefined" ? "active" : ""}`}>1</NavLink>
                 <NavLink to={route.url?.replace(":page", "2") || ""} className={`paginationButton ${page === "2" ? "active" : ""}`}>2</NavLink>
                 <NavLink to={route.url?.replace(":page", "3") || ""} className={`paginationButton ${page === "3" ? "active" : ""}`}>3</NavLink>
