@@ -8,7 +8,6 @@ import { NewsPage } from "./pages";
 import { Settings } from "./pages";
 import { PageNotFound } from "./pages";
 import { PrivateRoute } from "./components";
-
 import "./App.sass";
 
 function App() {

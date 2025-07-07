@@ -1,11 +1,18 @@
-import { SET_PAGE_TITLE, SET_THEME, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAILURE, SET_BREADCRUMBS, FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_FAILURE, SET_ARTICLE, LOGIN, LOGOUT, REGISTRATION } from './actionTypes';
+import { SET_PAGE_TITLE, SET_THEME, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAILURE, SET_BREADCRUMBS, FETCH_ARTICLE_SUCCESS, FETCH_ARTICLE_FAILURE, SET_ARTICLE, LOGIN, LOGOUT, REGISTRATION, GET_AUTH_STATE } from './actionTypes';
 import { API_ARTICLE_URL, API_ARTICLES_URL } from '../../consts/api';
 import axios from 'axios';
 import type { Article } from '../../types/articles';
 import type { Route } from '../../types/route';
 import type { RootState } from '../../store';
-import type { ThunkDispatch } from 'redux-thunk';
+import type { ThunkAction } from 'redux-thunk';
 import type { AnyAction } from 'redux';
+import { auth } from '../../firebase';
+
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut as firebaseSignOut
+} from 'firebase/auth';
 
 export const setPageTitle = (title: string) => {
   return {
@@ -39,7 +46,7 @@ export const fetchArticlesFailure = (error: string) => ({
 });
 
 export const fetchArticles = (url: string | null, page: number | null = null) => {
-  return async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
+  return async (dispatch: any) => {
     let fetchUrl = url || API_ARTICLES_URL;
     
     if (page) {
@@ -70,7 +77,7 @@ export const fetchArticleFailure = (error: string) => ({
 });
 
 export const fetchArticle = (id: string) => {
-  return async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
+  return async (dispatch: any) => {
     dispatch(setArticle(null));
     
     try {
@@ -96,23 +103,104 @@ export const setArticle = (article: Article | null) => {
   };
 };
   
-export const login = (username: string, password: string) => {
-    return {
+export const login = (email: string, password: string): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => 
+  async (dispatch) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      dispatch({
         type: LOGIN,
-        payload: { username, password }
-    };
-};
+        payload: {
+          isAuthenticated: true,
+          user: { email: userCredential.user.email, uid: userCredential.user.uid },
+          error: null
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      dispatch({
+        type: LOGIN,
+        payload: {
+          isAuthenticated: false,
+          user: null,
+          error: error instanceof Error ? error.message : 'An unknown error occurred'
+        }
+      });
+    }
+  };
 
-export const registration = (username: string, password: string) => {
-    return {
+export const registration = (email: string, password: string): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => 
+  async (dispatch) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      dispatch({
         type: REGISTRATION,
-        payload: { username, password }
-    };
-};
+        payload: {
+          isAuthenticated: true,
+          user: { email: userCredential.user.email, uid: userCredential.user.uid },
+          error: null
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      dispatch({
+        type: REGISTRATION,
+        payload: {
+          isAuthenticated: false,
+          user: null,
+          error: error instanceof Error ? error.message : 'An unknown error occurred'
+        }
+      });
+    }
+  };
 
-export const logout = () => {
-    return {
-        type: LOGOUT
-    };
-};
-    
+export const logout = (): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => 
+  async (dispatch) => {
+    try {
+      await firebaseSignOut(auth);
+      dispatch({
+        type: LOGOUT,
+        payload: {
+          isAuthenticated: false,
+          user: null,
+          error: null
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      console.error('Logout error:', error);
+      dispatch({
+        type: LOGOUT,
+        payload: {
+          isAuthenticated: false,
+          user: null,
+          error: error instanceof Error ? error.message : 'An unknown error occurred'
+        }
+      });
+    }
+  };
+
+  export const getAuthState = (): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => 
+    async (dispatch) => {
+      try {
+        const user = auth.currentUser;
+        console.log(user);
+        dispatch({
+          type: GET_AUTH_STATE,
+          payload: {
+            isAuthenticated: !!user,
+            user: user,
+            error: null
+          }
+        });
+      } catch (error) {
+        console.error('Error:', error);
+        dispatch({
+          type: GET_AUTH_STATE,
+          payload: {
+            isAuthenticated: false,
+            user: null,
+            error: error instanceof Error ? error.message : 'An unknown error occurred'
+          }
+        });
+      }
+    };      

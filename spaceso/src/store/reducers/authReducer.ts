@@ -1,8 +1,6 @@
 import { AnyAction } from 'redux';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { LOGIN, LOGOUT, REGISTRATION } from '../actions/actionTypes';
+import { LOGIN, LOGOUT, REGISTRATION, GET_AUTH_STATE } from '../actions/actionTypes';
 import { AuthState } from '../types/authTypes';
-import { auth } from '../../firebase';
 
 const initialState: AuthState = {
     isAuthenticated: false,
@@ -10,50 +8,40 @@ const initialState: AuthState = {
     error: null,
 };
 
-// Valid credentials for demo purposes (consider removing in production)
-const validCredentials = {  
-    username: '123@asdfs.com',
-    password: '123456',
-}
-
-interface Credentials {
-    username: string;
-    password: string;
-}
-
-export default function authReducer(state: AuthState = initialState, action: AnyAction): AuthState | Promise<AuthState> {
+export default function authReducer(state: AuthState = initialState, action: AnyAction): AuthState {
     switch (action.type) {
-        case LOGIN: {
-            const { username, password } = action.payload as Credentials;
-            if (username === validCredentials.username && password === validCredentials.password) {
-                return { ...state, isAuthenticated: true, user: { username }, error: null };
-            }
-            return { ...state, error: 'Invalid credentials' };
-        }
+        case LOGIN:
+            return {
+                ...state,
+                isAuthenticated: action.payload.isAuthenticated,
+                user: action.payload.user,
+                error: action.payload.error
+            };
+        case REGISTRATION:
+            return {
+                ...state,
+                isAuthenticated: action.payload.isAuthenticated,
+                user: action.payload.user,
+                error: action.payload.error
+            };
 
         case LOGOUT:
-            return { ...state, isAuthenticated: false, user: null, error: null };
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: null,
+                error: null
+            };
 
-        case REGISTRATION: {
-            const { username, password } = action.payload as Credentials;
-            validCredentials.username = username;
-            validCredentials.password = password;
-
-            return createUserWithEmailAndPassword(auth, username, password)
-                .then(() => ({
-                    ...state,
-                    isAuthenticated: true,
-                    user: { username },
-                    error: null
-                }))
-                .catch((error: Error) => ({
-                    ...state,
-                    error: error.message
-                }));
-        }
+        case GET_AUTH_STATE:
+            return {
+                ...state,
+                isAuthenticated: action.payload.isAuthenticated,
+                user: action.payload.user,
+                error: action.payload.error
+            };
 
         default:
-
             return state;
     }
 }

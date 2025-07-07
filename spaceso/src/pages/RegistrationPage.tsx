@@ -1,17 +1,14 @@
 
-import { useDispatch } from "react-redux";
-import { setPageTitle, setBreadcrumbs } from "../store/actions/actions";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
-import { ROUTES } from "../consts/routes";
 import { Navigate, NavLink } from "react-router-dom";
-import { registration } from "../store/actions/actions";
-import { useRef } from "react";
-import "./registrationPage.sass"
+import { RootState, useAppDispatch } from "../store";
+import { ROUTES } from "../consts/routes";
+import { registration, setPageTitle, setBreadcrumbs } from "../store/actions/actions";
+import "./registrationPage.sass";
 
 export function RegistrationPage() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const { isAuthenticated, error } = useSelector((state: RootState) => state.auth);
     const { theme } = useSelector((state: RootState) => state.ui);
     const emailRef = useRef<HTMLInputElement>(null);
@@ -27,7 +24,11 @@ export function RegistrationPage() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(registration(emailRef.current?.value || '', passwordRef.current?.value || ''));
+        const email = emailRef.current?.value || '';
+        const password = passwordRef.current?.value || '';
+        if (email && password) {
+            dispatch(registration(email, password));
+        }
     }
 
     if (isAuthenticated) {

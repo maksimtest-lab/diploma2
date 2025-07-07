@@ -1,24 +1,33 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import uiReducer from './reducers/uiReducers';
 import articlesReducer from './reducers/articlesReducer';
 import articleReducer from './reducers/articleReducer';
 import authReducer from './reducers/authReducer';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     articles: articlesReducer,
     article: articleReducer,
     ui: uiReducer,
-    auth: authReducer
+    auth: authReducer,
   },
-  middleware: (getDefaultMiddleware: (options?: { serializableCheck?: boolean }) => any) => getDefaultMiddleware()
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
-// Infer the root state type from the store itself
-type RootState = ReturnType<typeof store.getState>;
-
-// Export the type for use in components
-export { RootState };  
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export default store;
