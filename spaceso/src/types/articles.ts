@@ -26,6 +26,10 @@ interface Article {
 
 interface ArticlesState {
   items: Article[];
+  count: number;
+  page: number;
+  prev: string | null;
+  next: string | null;
   error: string | null;
   loading: boolean;
 }
