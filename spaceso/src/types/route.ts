@@ -16,4 +16,5 @@ export interface Routes {
     LOGIN: Route;
     REGISTRATION: Route;
     LOGOUT: Route;
+    PROFILE: Route;
 }

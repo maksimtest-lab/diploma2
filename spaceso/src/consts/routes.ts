@@ -14,7 +14,7 @@ export const ROUTES: Routes = {
     LOGIN: {url: '/login', name: 'Login'},
     REGISTRATION: {url: '/registration', name: 'Registration'},
     LOGOUT: {url: '/logout', name: 'Logout'},
-    // PROFILE: {url: '/profile', name: 'Profile'},
+    PROFILE: {url: '/profile', name: 'Profile'},
     // TODOS_CATEGORY: (category) => ({url: `/todos/${category}`, name: `Todos - ${category}`}),
 };
 

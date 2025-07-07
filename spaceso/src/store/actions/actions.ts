@@ -103,53 +103,67 @@ export const setArticle = (article: Article | null) => {
   };
 };
   
-export const login = (email: string, password: string): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => 
-  async (dispatch) => {
+export const login = (email: string, password: string): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => async (dispatch) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const { uid, email: userEmail, displayName, photoURL } = userCredential.user;
+      
       dispatch({
         type: LOGIN,
         payload: {
           isAuthenticated: true,
-          user: { email: userCredential.user.email, uid: userCredential.user.uid },
+          user: {
+            uid,
+            email: userEmail,
+            displayName,
+            photoURL
+          },
           error: null
         }
       });
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Login error:', error);
       dispatch({
         type: LOGIN,
         payload: {
           isAuthenticated: false,
           user: null,
-          error: error instanceof Error ? error.message : 'An unknown error occurred'
+          error: error instanceof Error ? error.message : 'Login failed'
         }
       });
+      throw error;
     }
   };
 
-export const registration = (email: string, password: string): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => 
-  async (dispatch) => {
+export const registration = (email: string, password: string): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => async (dispatch) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const { uid, email: userEmail, displayName, photoURL } = userCredential.user;
+      
       dispatch({
         type: REGISTRATION,
         payload: {
           isAuthenticated: true,
-          user: { email: userCredential.user.email, uid: userCredential.user.uid },
+          user: {
+            uid,
+            email: userEmail,
+            displayName,
+            photoURL
+          },
           error: null
         }
       });
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Registration error:', error);
       dispatch({
         type: REGISTRATION,
         payload: {
           isAuthenticated: false,
           user: null,
-          error: error instanceof Error ? error.message : 'An unknown error occurred'
+          error: error instanceof Error ? error.message : 'Registration failed'
         }
       });
+      throw error;
     }
   };
 
@@ -182,18 +196,36 @@ export const logout = (): ThunkAction<Promise<void>, RootState, unknown, AnyActi
   export const getAuthState = (): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => 
     async (dispatch) => {
       try {
+        // This will be called by the onAuthStateChanged listener
         const user = auth.currentUser;
-        console.log(user);
-        dispatch({
-          type: GET_AUTH_STATE,
-          payload: {
-            isAuthenticated: !!user,
-            user: user,
-            error: null
-          }
-        });
+        
+        if (user) {
+          const { uid, email, displayName, photoURL } = user;
+          dispatch({
+            type: GET_AUTH_STATE,
+            payload: {
+              isAuthenticated: true,
+              user: {
+                uid,
+                email,
+                displayName,
+                photoURL
+              },
+              error: null
+            }
+          });
+        } else {
+          dispatch({
+            type: GET_AUTH_STATE,
+            payload: {
+              isAuthenticated: false,
+              user: null,
+              error: null
+            }
+          });
+        }
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error getting auth state:', error);
         dispatch({
           type: GET_AUTH_STATE,
           payload: {
