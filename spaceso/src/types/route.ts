@@ -10,7 +10,9 @@ export interface Routes {
     HOME: Route;
     ARTICLES: Route;
     ARTICLES_PAGE: Route;
+    NEWSLIST: Route;
     NEWS: Route;
+    NEWSLIST_PAGE: Route;
     SETTINGS: Route;
     ARTICLE: Route;
     LOGIN: Route;

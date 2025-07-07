@@ -4,11 +4,15 @@ import uiReducer from './reducers/uiReducers';
 import articlesReducer from './reducers/articlesReducer';
 import articleReducer from './reducers/articleReducer';
 import authReducer from './reducers/authReducer';
+import newsReducer from './reducers/newsReducer';
+import newsListReducer from './reducers/newsListReducer';
 
 export const store = configureStore({
   reducer: {
     articles: articlesReducer,
     article: articleReducer,
+    news: newsReducer,
+    newsList: newsListReducer,
     ui: uiReducer,
     auth: authReducer,
   },

@@ -8,9 +8,11 @@ export const ROUTES: Routes = {
     HOME: {url: '/', name: 'Home', icon: FaFire},
     ARTICLES: {url: '/articles', name: 'Articles', icon: FaRegImage},
     ARTICLES_PAGE: {url: '/articles/page/:page', name: 'Articles Page', icon: FaRegImage},
-    NEWS: {url: '/news', name: 'News', icon: FaNewspaper},
-    SETTINGS: {url: '/settings', name: 'Settings', icon: FaCog},
     ARTICLE: {url: '/article/:id', name: 'Article', icon: FaRegImage},
+    NEWSLIST: {url: '/news', name: 'News', icon: FaNewspaper},
+    NEWS: {url: '/news/:id', name: 'News', icon: FaNewspaper},
+    NEWSLIST_PAGE: {url: '/news/page/:page', name: 'News Page', icon: FaNewspaper},
+    SETTINGS: {url: '/settings', name: 'Settings', icon: FaCog},
     LOGIN: {url: '/login', name: 'Login'},
     REGISTRATION: {url: '/registration', name: 'Registration'},
     LOGOUT: {url: '/logout', name: 'Logout'},
@@ -20,5 +22,5 @@ export const ROUTES: Routes = {
 
 export const NAVIGATION = [
     ROUTES.ARTICLES,
-    ROUTES.NEWS
+    ROUTES.NEWSLIST
 ];
