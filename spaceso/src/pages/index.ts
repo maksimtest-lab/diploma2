@@ -4,5 +4,6 @@ import { ArticlePage } from './ArticlePage';
 import { NewsPage } from './NewsPage';
 import { Settings } from './SettingsPage';
 import { PageNotFound } from './PageNotFound';
+import { LoginPage } from './LoginPage';
 
-export { MainPage, ArticlesPage, ArticlePage, NewsPage, Settings, PageNotFound } 
+export { MainPage, ArticlesPage, ArticlePage, NewsPage, Settings, PageNotFound, LoginPage } 

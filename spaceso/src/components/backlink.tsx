@@ -1,19 +1,22 @@
-import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
+import { useNavigate } from "react-router-dom";
 import "./backlink.sass"
 
 export default function Backlink() {
-    const location = useLocation();
     const theme = useSelector((state: RootState) => state.ui.theme);
-    const history = location.state?.history || [];
-    const backLink = history.length > 1 ? history[history.length - 2] : "/";
+    const navigation = useNavigate();
+
+    const backLinkHandle = (event: React.MouseEvent) => {
+        event.preventDefault(); 
+        navigation(-1);
+    }
     
     return (
         <div className={`backlink ${theme}`}>
-            <NavLink to={backLink}>
+            <NavLink to="" onClick={backLinkHandle}>
                 <FaArrowLeft /> Back to previous page
             </NavLink>
         </div>

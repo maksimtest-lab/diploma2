@@ -11,9 +11,9 @@ export const ROUTES: Routes = {
     NEWS: {url: '/news', name: 'News', icon: FaNewspaper},
     SETTINGS: {url: '/settings', name: 'Settings', icon: FaCog},
     ARTICLE: {url: '/article/:id', name: 'Article', icon: FaRegImage},
-    // LOGIN: {url: '/login', name: 'Login'},
-    // REGISTRATION: {url: '/registration', name: 'Registration'},
-    // LOGOUT: {url: '/logout', name: 'Logout'},
+    LOGIN: {url: '/login', name: 'Login'},
+    REGISTRATION: {url: '/registration', name: 'Registration'},
+    LOGOUT: {url: '/logout', name: 'Logout'},
     // PROFILE: {url: '/profile', name: 'Profile'},
     // TODOS_CATEGORY: (category) => ({url: `/todos/${category}`, name: `Todos - ${category}`}),
 };

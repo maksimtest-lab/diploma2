@@ -7,6 +7,7 @@ import { ArticlePage } from "./pages";
 import { NewsPage } from "./pages";
 import { Settings } from "./pages";
 import { PageNotFound } from "./pages";
+import { PrivateRoute } from "./components";
 
 import "./App.sass";
 
@@ -21,7 +22,8 @@ function App() {
                     <Route path={ROUTES.ARTICLE.url} element={<ArticlePage />} />
                     <Route path={ROUTES.ARTICLES_PAGE.url} element={<ArticlesPage />} />
                     <Route path={ROUTES.NEWS.url} element={<NewsPage />} />
-                    <Route path={ROUTES.SETTINGS.url} element={<Settings />} />
+
+                    <Route path={ROUTES.SETTINGS.url} element={<PrivateRoute><Settings /></PrivateRoute>} />
                     <Route path="*" element={<PageNotFound />} />
                 </Routes>
             </Layout>

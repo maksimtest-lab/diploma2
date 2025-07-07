@@ -34,8 +34,8 @@ export const fetchArticlesSuccess = (articles: Article[]) => ({
 });
 
 export const fetchArticlesFailure = (error: string) => ({
-  type: FETCH_ARTICLES_FAILURE,
-  payload: error
+    type: FETCH_ARTICLES_FAILURE,
+    payload: error
 });
 
 export const fetchArticles = (url: string | null, page: number | null = null) => {
@@ -50,8 +50,8 @@ export const fetchArticles = (url: string | null, page: number | null = null) =>
     }
     
     try {
-      const response = await axios.get(fetchUrl);
-      dispatch(fetchArticlesSuccess(response.data));
+        const response = await axios.get(fetchUrl);
+        dispatch(fetchArticlesSuccess(response.data));
     } catch (error) {
       console.error('Error fetching articles:', error);
       dispatch(fetchArticlesFailure(error instanceof Error ? error.message : 'Unknown error'));

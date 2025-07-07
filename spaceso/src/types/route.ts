@@ -13,4 +13,7 @@ export interface Routes {
     NEWS: Route;
     SETTINGS: Route;
     ARTICLE: Route;
+    LOGIN: Route;
+    REGISTRATION: Route;
+    LOGOUT: Route;
 }
