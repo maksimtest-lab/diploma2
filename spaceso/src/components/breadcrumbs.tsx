@@ -13,7 +13,7 @@ export function Breadcrumbs() {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
-        if (location.pathname.startsWith('/article/')) {
+        if (location.pathname.startsWith('/article/') || location.pathname.startsWith('/registration') || location.pathname.startsWith('/login')) {
             setIsActive(true);
         }
     }, [location]);

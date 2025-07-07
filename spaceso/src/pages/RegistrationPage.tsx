@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { ROUTES } from "../consts/routes";
 import { Navigate, NavLink } from "react-router-dom";
-import { login } from "../store/actions/actions";
+import { registration } from "../store/actions/actions";
 import { useRef } from "react";
 import "./registrationPage.sass"
 
-export function LoginPage() {
+export function RegistrationPage() {
     const dispatch = useDispatch();
     const { user , isAuthenticated, error } = useSelector((state: RootState) => state.auth);
     const { theme } = useSelector((state: RootState) => state.ui);
@@ -19,14 +19,14 @@ export function LoginPage() {
     useEffect(() => {
         dispatch(setBreadcrumbs([
             {url: '/', name: 'Home'},
-            {url: '/login', name: 'Login'}
+            {url: '/registration', name: 'Registration'}
         ]));
-        dispatch(setPageTitle('Sign In'));
+        dispatch(setPageTitle('Sign Up'));
     }, [dispatch]);
-    
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(login(emailRef.current?.value || '', passwordRef.current?.value || ''));
+        dispatch(registration(emailRef.current?.value || '', passwordRef.current?.value || ''));
     }
 
     if (isAuthenticated) {
@@ -34,25 +34,25 @@ export function LoginPage() {
     }
 
     return (
-        <div className="loginPage">
-            <div className={`loginPageForm ${theme}`}>
+        <div className="registrationPage">
+            <div className={`registrationPageForm ${theme}`}>
                 <form onSubmit={(handleSubmit)}>
-                    <div className="loginPageFormGroup">
+                    <div className="registrationPageFormGroup">
                         <label htmlFor="email">
                             <span>Email</span>
                         </label>
                             <input type="text" placeholder="Your email" id="email" required ref={emailRef}/>
                     </div>
-                    <div className="loginPageFormGroup">
+                    <div className="registrationPageFormGroup">
                         <label htmlFor="password">
                             <span>Password</span>
                         </label>
                         <input type="password" placeholder="Password" id="password" required ref={passwordRef}  />
                     </div>
                     {error && <p className="error">{error}</p>}
-                    <button type="submit">Sign In</button>
+                    <button type="submit">Sign Up</button>
                 </form>
-                <p>Don't have an account? <NavLink to={ROUTES.REGISTRATION.url}>Sign In</NavLink></p>
+                <p>Already have an account? <NavLink to={ROUTES.LOGIN.url}>Sign In</NavLink></p>
             </div>
         </div>
     )

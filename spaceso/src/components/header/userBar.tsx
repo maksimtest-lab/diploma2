@@ -6,11 +6,21 @@ import "./userBar.sass"
 
 export function UserBar() {
     const theme = useSelector((state: RootState) => state.ui.theme)
+    const { isAuthenticated } = useSelector((state: RootState) => state.auth)
     
     return (
         <div className={`userBar ${theme}`}>
-            <NavLink to={ROUTES.SETTINGS.url}>MA</NavLink>
-            <span>Maksim Alipau</span>
+            {isAuthenticated ? (
+                <>
+                    <NavLink to={ROUTES.SETTINGS.url}>MA</NavLink>
+                    <span>Maksim Alipau</span>
+                </>
+            ) : (
+                <>
+                    <NavLink to={ROUTES.LOGIN.url}>Sign In</NavLink>
+                    <NavLink to={ROUTES.REGISTRATION.url}>Sign Up</NavLink>
+                </>
+            )}
         </div>
     )
 }

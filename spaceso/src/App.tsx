@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { Layout } from "./components";
-import { MainPage } from './pages';
+import { LoginPage, MainPage, RegistrationPage } from './pages';
 import { ROUTES } from "./consts/routes";
 import { ArticlesPage } from "./pages";
 import { ArticlePage } from "./pages";
@@ -24,6 +24,8 @@ function App() {
                     <Route path={ROUTES.NEWS.url} element={<NewsPage />} />
 
                     <Route path={ROUTES.SETTINGS.url} element={<PrivateRoute><Settings /></PrivateRoute>} />
+                    <Route path={ROUTES.LOGIN.url} element={<LoginPage />} />
+                    <Route path={ROUTES.REGISTRATION.url} element={<RegistrationPage />} />
                     <Route path="*" element={<PageNotFound />} />
                 </Routes>
             </Layout>

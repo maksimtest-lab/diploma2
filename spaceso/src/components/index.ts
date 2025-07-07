@@ -4,4 +4,4 @@ export * from "./header/searchBar";
 export * from "./header/userBar";
 export * from "./navigation";
 export * from "./backlink";
-export * from "./privateRoute.tsx";
+export * from "./privateRoute";

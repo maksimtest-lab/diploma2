@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { ROUTES } from "../consts/routes";
 
-export default function PrivateRoute({ children }: { children: React.ReactNode }) {
+export function PrivateRoute({ children }: { children: React.ReactNode }) {
     const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-    // const location = useLocation();
 
     if (!isAuthenticated) {
         return (<div>

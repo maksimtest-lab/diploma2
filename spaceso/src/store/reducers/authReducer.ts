@@ -1,27 +1,46 @@
 import { AnyAction } from 'redux';
-import { LOGIN, LOGOUT } from '../actions/actionTypes';
+import { LOGIN, LOGOUT, REGISTRATION } from '../actions/actionTypes';
 
-const initialState: any = {
-        isAuthenticated: false,
-        user: null,
+const initialState = {
+    isAuthenticated: false,
+    user: null,
+    error: null,
 };
 
-const validCredentials: any = {  
-    username: 'admin',
+const validCredentials = {  
+    username: '123@asdfs.com',
     password: '123456',
 }
 
-export default function authReducer(state: any = initialState, action: AnyAction) {
+export default function authReducer(state = initialState, action: AnyAction) {
+    let username, password;
+
     switch (action.type) {
         case LOGIN:
-            const {username, password} = action.payload;
+            console.log(action.payload);
+            username = action.payload.username;
+            password = action.payload.password;
             if (username === validCredentials.username && password === validCredentials.password) {
                 return { ...state, isAuthenticated: true, user: { username } };
             }
-            return state;
+
+            return { ...state, error: 'Invalid credentials' };
+
         case LOGOUT:
-            return { ...state, isAuthenticated: false };
+
+            return { ...state, isAuthenticated: false, user: null, error: null };
+
+        case REGISTRATION:
+            console.log(action.payload);
+            username = action.payload.username;
+            password = action.payload.password;
+            validCredentials.username = username;
+            validCredentials.password = password;
+
+            return { ...state, isAuthenticated: true, user: { username } };
+
         default:
+
             return state;
     }
 }

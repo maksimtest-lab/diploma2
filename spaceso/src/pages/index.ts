@@ -5,5 +5,6 @@ import { NewsPage } from './NewsPage';
 import { Settings } from './SettingsPage';
 import { PageNotFound } from './PageNotFound';
 import { LoginPage } from './LoginPage';
+import { RegistrationPage } from './RegistrationPage';
 
-export { MainPage, ArticlesPage, ArticlePage, NewsPage, Settings, PageNotFound, LoginPage } 
+export { MainPage, ArticlesPage, ArticlePage, NewsPage, Settings, PageNotFound, LoginPage, RegistrationPage } 
